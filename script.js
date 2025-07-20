@@ -2,7 +2,7 @@ const rock = document.querySelector(".rock");
 const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 const options = document.querySelector("#image-container");
-const battleArea = document.querySelector("#battle-area");
+const results = document.querySelector("#results");
 
 const reminder = document.createElement("p");
 reminder.textContent = "Psst - Click the button";
@@ -13,8 +13,7 @@ options.addEventListener("click", evt => {
     if (document.body.contains(reminder)) document.body.removeChild(reminder);
 
   } else if (evt.target.tagName === "IMG") {
-    document.body.insertBefore(reminder, battleArea);
-    //setTimeout(() => document.body.removeChild(reminder), 1000)
+    document.body.insertBefore(reminder, results);
   }
 
 })
@@ -30,13 +29,6 @@ function getComputerChoice() {
       return "Scissors";
   }
 }
-
-
-function getHumanChoice() {
-  let choice = prompt("Enter Rock, Paper or Scissors");
-  return choice[0].toUpperCase() + choice.slice(1).toLowerCase();
-}
-
 
 function playGame() {
   let humanScore = 0;
