@@ -5,11 +5,14 @@ const reminder = document.createElement("p");
 reminder.textContent = "Psst - Click the button";
 reminder.setAttribute("id", "reminder");
 
+let humanScore = 0;
+let computerScore = 0;
+
 options.addEventListener("click", evt => {
   if (evt.target.tagName === "BUTTON") {
     if (document.body.contains(reminder)) document.body.removeChild(reminder);
     
-    playRound(capitalise(evt.target.id));
+    playRound(capitalise(evt.target.id), getComputerChoice());
 
   } else if (evt.target.tagName === "IMG") {
     document.body.insertBefore(reminder, results);
@@ -33,45 +36,41 @@ function getComputerChoice() {
   }
 }
 
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
+function playRound(humanChoice, computerChoice) {
 
-  function playRound(humanChoice = "rock", computerChoice = "rock") {
-    if (humanChoice === computerChoice) {
-      return `DRAW - You both chose ${humanChoice}!`;
+  const humanImage = document.querySelector("#results .human-image");
+  humanImage.src = `./images/${humanChoice.toLowerCase()}.jpg`;
+  const computerImage = document.querySelector("#results .computer-image");
+  computerImage.src = `./images/${computerChoice.toLowerCase()}.jpg`;
+  const displayMessage = document.querySelector("#results .message");
+
+  if (humanChoice === computerChoice) {
+    displayMessage.textContent = `DRAW - You both chose ${humanChoice}!`;
+  } else {
+    let winner;
+
+    switch (humanChoice) {
+      case "Paper":
+        winner = (computerChoice === "Rock") ? humanChoice : computerChoice;
+        break;
+      case "Rock":
+        winner = (computerChoice === "Scissors") ? humanChoice : computerChoice;
+        break;
+      case "Scissors":
+        winner = (computerChoice === "Paper") ? humanChoice : computerChoice;
+        break;
+    }
+
+    if (winner === humanChoice) {
+      humanScore++;
+      displayMessage.textContent = `WIN - ${humanChoice} beats ${computerChoice}!`
     } else {
-      let winner;
-
-      switch (humanChoice) {
-        case "Paper":
-          winner = (computerChoice === "Rock") ? humanChoice : computerChoice;
-          break;
-        case "Rock":
-          winner = (computerChoice === "Scissors") ? humanChoice : computerChoice;
-          break;
-        case "Scissors":
-          winner = (computerChoice === "Paper") ? humanChoice : computerChoice;
-          break;
-      }
-
-      if (winner === humanChoice) {
-        humanScore++;
-        return `WIN - ${humanChoice} beats ${computerChoice}!`
-      } else {
-        computerScore++;
-        return `LOSS - ${computerChoice} beats ${humanChoice}!`
-      }
+      computerScore++;
+      displayMessage.textContent = `LOSS - ${computerChoice} beats ${humanChoice}!`
     }
   }
 
-  while (humanScore < 5 && computerScore < 5) {
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    console.log(playRound(humanChoice, computerChoice));
+  if (humanScore >=5 || computerScore >= 5) {
+    // win sequence
   }
-
-  if (computerScore === humanScore) console.log(`It was a draw! ${humanScore} : ${computerScore}`)
-  else if (computerScore >= humanScore) console.log(`The computer won! ${computerScore} : ${humanScore}`)
-  else console.log(`You won! ${humanScore} : ${computerScore}`);
 }
