@@ -5,7 +5,6 @@ const humanImage = document.querySelector("#results .human-image");
 const computerImage = document.querySelector("#results .computer-image");
 
 const reminder = document.createElement("p");
-reminder.textContent = "Psst - Click the button";
 reminder.setAttribute("id", "reminder");
 
 let humanScore = 0;
@@ -13,14 +12,21 @@ const humanScoreDisplay = document.querySelector(".human-score .score");
 let computerScore = 0;
 const computerScoreDisplay = document.querySelector(".computer-score .score");
 
+let countingDown = false;
 options.addEventListener("click", evt => {
   if (evt.target.tagName === "BUTTON") {
     if (document.body.contains(reminder)) document.body.removeChild(reminder);
-    
-    countdown();
-    setTimeout(() => playRound(capitalise(evt.target.id), getComputerChoice()), 3000);
+      if (!countingDown) {
+        countingDown = true;
+        countdown();
+        setTimeout(() => playRound(capitalise(evt.target.id), getComputerChoice()), 3000);
+      } else {
+        reminder.textContent = "Wait";
+        document.body.insertBefore(reminder, results);
+      }
 
   } else if (evt.target.tagName === "IMG") {
+    reminder.textContent = "Psst - Click the button";
     document.body.insertBefore(reminder, results);
   }
 
@@ -55,6 +61,9 @@ function countdown() {
 }
 
 function playRound(humanChoice, computerChoice) {
+  if (document.body.contains(reminder)) document.body.removeChild(reminder);
+  countingDown = false;
+
   humanImage.src = `./images/${humanChoice.toLowerCase()}.jpg`;
   computerImage.src = `./images/${computerChoice.toLowerCase()}.jpg`;
 
