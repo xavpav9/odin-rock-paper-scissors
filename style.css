@@ -47,3 +47,14 @@ body {
   font-style: italic;
   color: hsl(0, 100%, 25%);
 }
+
+
+
+
+
+
+#results .flex-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
