@@ -1,5 +1,8 @@
 const options = document.querySelector("#image-container");
 const results = document.querySelector("#results");
+const displayMessage = document.querySelector("#results .message");
+const humanImage = document.querySelector("#results .human-image");
+const computerImage = document.querySelector("#results .computer-image");
 
 const reminder = document.createElement("p");
 reminder.textContent = "Psst - Click the button";
@@ -12,7 +15,8 @@ options.addEventListener("click", evt => {
   if (evt.target.tagName === "BUTTON") {
     if (document.body.contains(reminder)) document.body.removeChild(reminder);
     
-    playRound(capitalise(evt.target.id), getComputerChoice());
+    countdown();
+    setTimeout(() => playRound(capitalise(evt.target.id), getComputerChoice()), 3000);
 
   } else if (evt.target.tagName === "IMG") {
     document.body.insertBefore(reminder, results);
@@ -36,13 +40,22 @@ function getComputerChoice() {
   }
 }
 
+function countdown() {
+  humanImage.src="./images/question-mark.jpg";
+  computerImage.src="./images/question-mark.jpg";
+  displayMessage.textContent = "3";
+  setTimeout(() => {
+    displayMessage.textContent = "2";
+  }, 1000); 
+  setTimeout(() => {
+    displayMessage.textContent = "1";
+  }, 2000); 
+}
+
 function playRound(humanChoice, computerChoice) {
 
-  const humanImage = document.querySelector("#results .human-image");
   humanImage.src = `./images/${humanChoice.toLowerCase()}.jpg`;
-  const computerImage = document.querySelector("#results .computer-image");
   computerImage.src = `./images/${computerChoice.toLowerCase()}.jpg`;
-  const displayMessage = document.querySelector("#results .message");
 
   if (humanChoice === computerChoice) {
     displayMessage.textContent = `DRAW - You both chose ${humanChoice}!`;
