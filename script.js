@@ -9,7 +9,9 @@ reminder.textContent = "Psst - Click the button";
 reminder.setAttribute("id", "reminder");
 
 let humanScore = 0;
+const humanScoreDisplay = document.querySelector(".human-score .score");
 let computerScore = 0;
+const computerScoreDisplay = document.querySelector(".computer-score .score");
 
 options.addEventListener("click", evt => {
   if (evt.target.tagName === "BUTTON") {
@@ -53,7 +55,6 @@ function countdown() {
 }
 
 function playRound(humanChoice, computerChoice) {
-
   humanImage.src = `./images/${humanChoice.toLowerCase()}.jpg`;
   computerImage.src = `./images/${computerChoice.toLowerCase()}.jpg`;
 
@@ -76,9 +77,11 @@ function playRound(humanChoice, computerChoice) {
 
     if (winner === humanChoice) {
       humanScore++;
+      humanScoreDisplay.textContent = humanScore;
       displayMessage.textContent = `WIN - ${humanChoice} beats ${computerChoice}!`
     } else {
       computerScore++;
+      computerScoreDisplay.textContent = computerScore;
       displayMessage.textContent = `LOSS - ${computerChoice} beats ${humanChoice}!`
     }
   }
