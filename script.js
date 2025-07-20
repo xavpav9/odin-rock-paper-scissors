@@ -13,20 +13,27 @@ let computerScore = 0;
 const computerScoreDisplay = document.querySelector(".computer-score .score");
 
 let countingDown = false;
+let finished = false;
 options.addEventListener("click", evt => {
   if (evt.target.tagName === "BUTTON") {
     if (document.body.contains(reminder)) document.body.removeChild(reminder);
-      if (!countingDown) {
+      if (!countingDown && !finished) {
         countingDown = true;
         countdown();
         setTimeout(() => playRound(capitalise(evt.target.id), getComputerChoice()), 3000);
       } else {
-        reminder.textContent = "Wait";
+        if (!finished) {
+          reminder.textContent = "Wait";
+        } else {
+          reminder.textContent = "The Game Has Finished! - refresh to replay.";
+          setTimeout(() => document.body.removeChild(reminder), 1500);
+        }
+        
         document.body.insertBefore(reminder, results);
       }
 
-  } else if (evt.target.tagName === "IMG") {
-    reminder.textContent = "Psst - Click the button";
+  } else if (evt.target.tagName === "IMG" && !finished && !countingDown) {
+    reminder.textContent = "Psst - Click the button, not the image.";
     document.body.insertBefore(reminder, results);
   }
 
@@ -60,6 +67,16 @@ function countdown() {
   }, 2000); 
 }
 
+function playWinSequence(winner) {
+  const results = document.querySelector("#results h2");
+  if (winner === "human") {
+    results.textContent = "Well done, you have won the game!";
+  } else {
+    results.textContent = "You have lost! The computer has won the game!";
+  };
+  finished = true;
+}
+
 function playRound(humanChoice, computerChoice) {
   if (document.body.contains(reminder)) document.body.removeChild(reminder);
   countingDown = false;
@@ -86,16 +103,16 @@ function playRound(humanChoice, computerChoice) {
 
     if (winner === humanChoice) {
       humanScore++;
-      humanScoreDisplay.textContent = humanScore;
       displayMessage.textContent = `WIN - ${humanChoice} beats ${computerChoice}!`
     } else {
       computerScore++;
-      computerScoreDisplay.textContent = computerScore;
       displayMessage.textContent = `LOSS - ${computerChoice} beats ${humanChoice}!`
     }
   }
 
-  if (humanScore >=5 || computerScore >= 5) {
-    // win sequence
+  humanScoreDisplay.textContent = humanScore;
+  computerScoreDisplay.textContent = computerScore;
+  if (humanScore >= 5 || computerScore >= 5) {
+    playWinSequence(humanScore >= 5 ? "human" : "computer");
   }
 }
