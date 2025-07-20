@@ -3,25 +3,31 @@
   <head>
     <meta charset="UTF-8">
     <title>Rock Paper Scissors</title>
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
     <h1>Rock Paper Scissors</h1>
     <br>
-    <div class="image-container">
+    <div id="image-container">
       <div class="rock">
         <img src="./images/rock.jpg" alt="rock">
-        <button>Rocks</button>
+        <a href="#battle-area"><button>Rocks</button></a>
       </div>
       <div class="paper">
         <img src="./images/paper.jpg" alt="paper">
-        <button>Paper</button>
+        <a href="#battle-area"><button>Paper</button></a>
       </div>
       <div class="scissors">
         <img src="./images/scissors.png" alt="scissors">
-        <button>Scissors</button>
+        <a href="#battle-area"><button>Scissors</button></a>
       </div>
+    </div>
+    
+    <div id="battle-area">
+
+    </div>
+    
   </body>
 </html>

@@ -1,3 +1,24 @@
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+const options = document.querySelector("#image-container");
+const battleArea = document.querySelector("#battle-area");
+
+const reminder = document.createElement("p");
+reminder.textContent = "Psst - Click the button";
+reminder.setAttribute("id", "reminder");
+
+options.addEventListener("click", evt => {
+  if (evt.target.tagName === "BUTTON") {
+    if (document.body.contains(reminder)) document.body.removeChild(reminder);
+
+  } else if (evt.target.tagName === "IMG") {
+    document.body.insertBefore(reminder, battleArea);
+    //setTimeout(() => document.body.removeChild(reminder), 1000)
+  }
+
+})
+
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3);
   switch (computerChoice) {
