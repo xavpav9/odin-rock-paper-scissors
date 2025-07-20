@@ -1,6 +1,3 @@
-const rock = document.querySelector(".rock");
-const paper = document.querySelector(".paper");
-const scissors = document.querySelector(".scissors");
 const options = document.querySelector("#image-container");
 const results = document.querySelector("#results");
 
@@ -11,12 +8,18 @@ reminder.setAttribute("id", "reminder");
 options.addEventListener("click", evt => {
   if (evt.target.tagName === "BUTTON") {
     if (document.body.contains(reminder)) document.body.removeChild(reminder);
+    
+    playRound(capitalise(evt.target.id));
 
   } else if (evt.target.tagName === "IMG") {
     document.body.insertBefore(reminder, results);
   }
 
 })
+
+function capitalise(str) {
+  return str.split(" ").reduce((result, word) => result + " " + word[0].toUpperCase() + word.slice(1).toLowerCase(), "").slice(1);
+}
 
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3);
