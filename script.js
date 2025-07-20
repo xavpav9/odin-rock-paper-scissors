@@ -49,7 +49,7 @@ function playGame() {
     }
   }
 
-  for (i=0;i<5;i++) {
+  while (humanScore < 5 && computerScore < 5) {
     const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
     console.log(playRound(humanChoice, computerChoice));
