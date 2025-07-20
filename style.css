@@ -57,4 +57,59 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  height: 200px;
+  text-align: center;
+}
+
+#results .human-score, #results .computer-score {
+  width: 10em;
+  align-items: center;
+}
+
+
+#results .human-score {
+  background-color: green;
+}
+
+#results .computer-score {
+  background-color: red;
+}
+
+#results .score, #results .label {
+  border-style: solid;
+  border-color: black;
+  padding: 10px;
+}
+
+#results .score {
+  font-size: 100px;
+  border-width: 1px 2px 2px 2px;
+}
+
+#results .label {
+  border-width: 2px 2px 1px 2px;
+}
+
+
+
+
+
+#results .flex-container .round {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: yellow;
+  padding: 20px;
+  border: 2px solid black;
+}
+
+#results img {
+  width: 150px;
+  height: auto;
+  border: thin solid black;
+}
+
+#results .message {
+  width: 150px;
 }

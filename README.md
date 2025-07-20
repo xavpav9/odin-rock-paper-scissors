@@ -21,3 +21,10 @@ Scissors Image:
 - From [Unsplash](https://unsplash.com/photos/gray-steel-scissors-SmocKx2oDZc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
 
 
+Question Mark Image:
+
+- Photo by [D koi](https://unsplash.com/@dkoi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
+
+- From [Unsplash](https://unsplash.com/photos/a-silver-ring-with-a-black-background-jKZdHpGFpjc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
+
+
