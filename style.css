@@ -1,0 +1,35 @@
+h1 {
+  text-align: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.image-container > div {
+  flex: 1 1 0;
+  flex-direction: column;
+  display: flex;
+  border: thin solid black;
+}
+
+.image-container div > img {
+  max-width: 100%;
+  min-width: 0px;
+  flex: 1 1 auto;
+}
+
+.image-container div > button {
+  min-width: 8em;
+  height: 3em;
+  border-radius: 0px;
+  border: 0px;
+}
+
+.image-container div > button:hover {
+  background-color: rgb(150, 150, 150);
+}
